@@ -47,7 +47,7 @@ ESP32 固件与手机 App 之间的 BLE 数据协议。两端都必须按本文�
 | 0x12 | SET_QUALITY | `preheat_us`(2B) `repeat`(1B) `dot_comp`(1B) | 打印质量：预加热脉冲、重复加热遍数（1~3）、点密度补偿百分比（0~150） |
 | 0x13 | SET_DRIVE | `mode`(1B) | 电机驱动方式：0=1-2 相半步（一行 4 拍），1=双相整步（一行 2 拍）。仅空闲时有效 |
 | 0x20 | GET_STATUS | 无 | 请求一次状态通知 |
-| 0x30 | SELFTEST | `kind`(1B) | 0=整页自检页，1=打印头点检（版本号+能量阶梯+384 竖条），2=全黑负载页，3=测量+点检，4=VH 测量（15s 空载+满载），5=原工程复刻页，6=走纸标尺页 |
+| 0x30 | SELFTEST | `kind`(1B) | 0=整页自检页，1=打印头点检（版本号+能量阶梯+384 竖条），2=全黑负载页，3=测量+点检，4=VH 测量（15s 空载+满载），5=波形复刻页，6=走纸标尺页 |
 | 0x40 | OTA_INFO | 无 | 查询固件版本、当前 slot、备用分区大小。旧固件（≤85）不响应，见第 8 节 |
 | 0x41 | OTA_BEGIN | `size`(4B) `crc32`(4B) | 开始 BLE 固件升级 |
 | 0x42 | OTA_DATA | `seq`(2B,小端) + `data`(≤243B) | 固件镜像分块，seq 从 0 递增 |
@@ -179,8 +179,7 @@ App:      BEGIN(2000) → DATA(0..4) → DATA(5..9) → ... → END
 | 长按 | 按住 ≥ `KEY_LONG_MS`(1200ms) 开始**连续出纸**，松手立即停；最长 30s 自动停 |
 | 上电 | **不再自动打自检页**（旧的开机 6s 自动点检已删除） |
 
-长按语义参考毕设原工程 `em_button.cpp` 的 `motor_start()` / `motor_stop()`，
-但改成事件化：按键任务只发 `BTN_LONG_START` / `BTN_LONG_RELEASE`，`printTask`
+长按实现为事件化：按键任务只发 `BTN_LONG_START` / `BTN_LONG_RELEASE`，`printTask`
 每轮只走 `LONG_FEED_CHUNK_BEATS`(8 拍 = 0.25mm) 就回来检查标志，不在按键任务里
 同步跑几百拍把 RTOS 其他任务饿死；走纸期间 VH 保持关断。
 
