@@ -1,0 +1,21 @@
+/* ============================================================================
+ * 文件：app/task_monitor.h
+ * 层次：应用层 / 监控任务
+ * 职责：声明监控任务体（monitorTask）。周期做四件事：
+ *        ① 采样（温度无条件采，电池只在空闲采）
+ *        ② VH 延迟断电 tick、热锁存自动解锁、状态灯 tick
+ *        ③ 每秒按头温重算加热时间
+ *        ④ 状态上报（打印中 200ms、空闲 1s）
+ * 对应原工程：src/em_task.cpp 的 task_report() 与 read_all_hal()
+ *
+ * 任务参数（栈 3072 / 优先级 2 / core0）在 main.cpp 的 setup() 里创建。
+ * 放 core0 是为了和 core1 的打印任务错开，互不抢占。
+ * ========================================================================== */
+#ifndef TASK_MONITOR_H
+#define TASK_MONITOR_H
+
+#include <Arduino.h>
+
+void task_monitor(void *arg);
+
+#endif
