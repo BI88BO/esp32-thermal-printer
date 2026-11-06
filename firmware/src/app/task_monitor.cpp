@@ -2,7 +2,6 @@
  * 文件：app/task_monitor.cpp
  * 层次：应用层 / 监控任务
  * 职责：采集节奏 + 周期维护 + 状态上报。
- * 对应原工程：src/em_task.cpp 的 task_report()
  *
  * 两条容易踩错的约定：
  *   ① sensor_update(printing) 的参数只控制「要不要采电池」，NTC 温度是

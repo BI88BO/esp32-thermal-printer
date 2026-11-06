@@ -7,7 +7,6 @@
  *         hal/paper.h        缺纸检测与去抖
  *         core/temp_comp.h   表 4 温度→脉宽补偿（纯计算）
  *       本文件只负责"按什么节奏采"和把结果转出去。
- * 对应原工程：src/hal/em_adc.h
  *
  * 温度这条线最关键：sensor_heat_us_compensated() 把 App 设的基准浓度按
  * 实测头温折算；50℃/45℃ 的熔断与恢复阈值写在 config.h，判定在

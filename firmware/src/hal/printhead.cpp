@@ -2,15 +2,14 @@
  * 文件：hal/printhead.cpp
  * 层次：硬件抽象层 (HAL) / 打印头本体
  * 职责：STB 选通 + SPI 送行 + 单组加热 + 质量参数寄存器 + 行时间估算。
- * 对应原工程：src/hal/em_printer.cpp（+ em_spi.cpp 的送行部分）
  * 依赖：config.h、core/heat_model.h（算脉宽）、hal/thermal_guard.h（熔断判定）、
  *       hal/vh.h（熔断时立即断电）、hal/sensor.h（间接，经 thermal_guard）
  * 被谁用：hal/printer.cpp（行编排）
  *
  * 关于 SPI 只写不收：hspi.transfer(buf, len) 是双向的，会把 MISO(GPIO16)
- * 读到的电平写回 buf。原工程每行都重新 memset 所以没暴露，但这里 row 指向
+ * 读到的电平写回 buf。只要调用方每行都 memset 就不会暴露，但这里 row 指向
  * 调用方的缓冲区，覆写它属于越界副作用，所以用 writeBytes()。
- * 注意：这不是当年"只出第一行"的原因，原工程用 transfer 同样能打满整块。
+ * 注意：transfer() 本身不会导致"只出第一行"，两种写法都能打满整块。
  * ========================================================================== */
 
 #include "printhead.h"

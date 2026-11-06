@@ -3,10 +3,9 @@
  * 层次：硬件抽象层 (HAL) / 按键去抖
  * 职责：10ms 轮询一次，连续 KEY_DEBOUNCE 次电平一致才认；按住达到
  *       KEY_LONG_MS 立刻发 BTN_LONG_START，松手再发 BTN_LONG_RELEASE。
- * 对应原工程：src/hal/em_button.cpp（语义参考，实现改为事件化）
  *
- * 原工程在按键回调里直接 motor_start()/motor_stop() 持续走纸，那是裸机
- * 单循环；我们在 FreeRTOS 上改成只发事件，走纸由 app/job.cpp 分块执行。
+ * 不要在按键回调里同步循环走纸——那是裸机单循环的做法；在 FreeRTOS 上
+ * 只发事件，走纸由 app/job_idle.cpp 分块执行，期间其它任务照常调度。
  *
  * 上电时若按键正好被按住，pressMs 取当前 millis() 而不是 0，
  * 否则 millis()-0 会立刻误触发一次长按出纸。

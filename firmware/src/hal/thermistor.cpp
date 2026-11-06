@@ -2,7 +2,6 @@
  * 文件：hal/thermistor.cpp
  * 层次：硬件抽象层 (HAL) / 打印头热敏电阻（NTC）
  * 职责：采样、滤波、分压还原、Beta 公式换算、开路短路故障判定。
- * 对应原工程：src/hal/em_adc.cpp 的 tempreture 部分
  * 依赖：config.h、hal/adc_filter.h、math.h
  * ========================================================================== */
 

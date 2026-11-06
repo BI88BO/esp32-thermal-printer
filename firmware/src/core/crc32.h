@@ -2,7 +2,6 @@
  * 文件：core/crc32.h
  * 层次：纯逻辑层 / 通用校验
  * 职责：CRC32/IEEE 增量计算，和 Java java.util.zip.CRC32、zlib 完全一致。
- * 对应原工程：无
  *
  * 用法：
  *   uint32_t c = CRC32_INIT;

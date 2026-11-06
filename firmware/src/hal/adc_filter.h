@@ -2,7 +2,6 @@
  * 文件：hal/adc_filter.h
  * 层次：硬件抽象层 (HAL) / ADC 通用滤波（纯头文件，模板不能分离编译）
  * 职责：三个可复用的滤波/采样原语，被 hal/thermistor 和 hal/battery 共用。
- * 对应原工程：src/hal/em_adc.cpp 里的滤波部分（原工程只有一档均值）
  *
  * 为什么抽出来：NTC 和电池是同一种问题——ADC 读数被 BLE 射频和
  * VH 大电流干扰，单次采样不可信。两级串联：

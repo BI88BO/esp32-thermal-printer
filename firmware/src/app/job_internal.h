@@ -2,7 +2,6 @@
  * 文件：app/job_internal.h
  * 层次：应用层 / 打印任务内部约定
  * 职责：printTask 的三个状态分支，只在 app/ 内部使用，不对外暴露。
- * 对应原工程：src/em_task.cpp 里 run_printer() 的几个 if 分支
  *
  * 为什么要拆：
  *   build 92 及以前 job.cpp 是 254 行的单个函数，靠 if(st==0/1/2/3) 硬分四段，

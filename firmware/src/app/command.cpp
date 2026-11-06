@@ -2,7 +2,6 @@
  * 文件：app/command.cpp
  * 层次：应用层 / 命令分发
  * 职责：BLE 命令 → 具体动作；作业生命周期的收尾、暂停、清场、状态上报。
- * 对应原工程：src/em_task.cpp 的命令处理部分
  *
  * 执行上下文提醒：
  *   onCommand() 由协议层在 BLE 回调里调用。这里所有的「重活」都只置标志：
@@ -74,7 +73,7 @@ void command_pause_overheat(void)
     jobState     = 3;
     pauseSinceMs = millis();
     lastRxMs     = millis();         // 暂停期间冻结断流超时
-    /* 过热告警：闪 3 次。非阻塞，不会拖住 BLE 回调（原工程是 delay 硬等） */
+    /* 过热告警：闪 3 次。非阻塞，不会拖住 BLE 回调 */
     led_blink(LED_WARN_TIMES, LED_WARN_ON_MS, LED_WARN_OFF_MS);
     LOGF("[OVERHEAT] pause at %u/%u, head %dC, VH forced OFF\n",
          doneLines, totalLines, sensor_head_temp());
@@ -166,7 +165,7 @@ static void onCommand(uint8_t type, const uint8_t *p, uint8_t n)
         firstPktLogged = false;
         lastRxMs = millis();
         jobState = 1;
-        led_blink(1, LED_SHORT_ON_MS, 0);      // 开始打印（对应原工程 LED_PRINTER_START）
+        led_blink(1, LED_SHORT_ON_MS, 0);      // 开始打印
         proto_send_ack(CMD_PRINT_BEGIN, 0);
         LOGF("[PRINT] begin %u lines\n", totalLines);
         break;

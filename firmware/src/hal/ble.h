@@ -7,7 +7,6 @@
  * 文件：hal/ble.h
  * 层次：硬件抽象层 (HAL) / 无线通信
  * 职责：BLE GATT 服务的建立、连接回调、以及协议层的发送通道。
- * 对应原工程：src/hal/em_ble.h + src/hal/em_ble.cpp
  *
  * 对外只有两件事：
  *   ble_init()       —— setup() 里调一次，建服务并开始广播

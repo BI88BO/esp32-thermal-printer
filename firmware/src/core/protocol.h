@@ -2,7 +2,6 @@
  * 文件：core/protocol.h
  * 层次：纯逻辑层 / BLE 通信协议
  * 职责：定义帧格式、命令码、事件码、错误码与协议层接口。
- * 对应原工程：无（原工程用固定字节序列 A5 A5 A5 A5 0x01/02/03 下发密度）
  *
  * 帧格式（详见 newproject/PROTOCOL.md）：
  *   AA 55 | type(1) | len(1) | payload(len) | checksum(1)

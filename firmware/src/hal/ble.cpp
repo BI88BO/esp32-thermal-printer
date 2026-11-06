@@ -2,7 +2,6 @@
  * 文件：hal/ble.cpp
  * 层次：硬件抽象层 (HAL) / 无线通信
  * 职责：BLE Server / Service / Characteristic 的生命周期，以及收发的最后一公里。
- * 对应原工程：src/hal/em_ble.cpp
  *
  * 数据流：
  *   手机写 RX 特征 → onWrite() → proto_feed()（core/protocol.cpp 拼帧）
@@ -46,7 +45,7 @@ class ServerCB : public BLEServerCallbacks
     {
         bleConnected = true;
         BLEDevice::setMTU(BLE_MTU);             // 协商大 MTU，OTA 一帧能单片发完
-        led_blink(1, LED_SHORT_ON_MS, 0);       // 连接提示（对应原工程 LED_CONNECT）
+        led_blink(1, LED_SHORT_ON_MS, 0);       // 连接提示
         LOGLN("[BLE] connected");
     }
 

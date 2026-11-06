@@ -7,7 +7,6 @@
  * 文件：app/runtime.h
  * 层次：应用层 / 全局运行状态
  * 职责：集中声明所有「跨任务、跨模块」共享的状态量。
- * 对应原工程：src/em_device.h + src/em_device.cpp（全局设备对象）
  *
  * 为什么要有这一层：
  *   固件是 FreeRTOS 多任务：BLE 回调（协议栈上下文）、printTask（core1）、

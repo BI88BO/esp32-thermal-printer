@@ -3,7 +3,6 @@
  * 层次：硬件抽象层 (HAL) / 传感与补偿门面
  * 职责：决定"什么时候采什么"，然后把结果转发给上层。
  *       具体换算全部在子模块里，本文件不含任何公式。
- * 对应原工程：src/hal/em_adc.cpp
  *
  * 采集节奏由 app/tasks.cpp 的 monitorTask 决定：忙时 20ms、空闲 100ms。
  * 注意 sensor_update(printing) 这个参数只控制「要不要采电池」——

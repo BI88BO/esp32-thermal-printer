@@ -2,7 +2,6 @@
  * 文件：core/ota.h
  * 层次：纯逻辑层 / BLE 固件升级
  * 职责：双 app 分区 OTA 的对外接口与错误码。
- * 对应原工程：无（原工程没有 OTA）
  *
  * 原理：写进「当前没在跑」的那个 app 分区 → CRC32 校验 →
  *       Update.end() 改 otadata 启动指针 → ESP.restart()；

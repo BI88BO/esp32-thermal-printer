@@ -7,7 +7,6 @@
  *         ③ 按算好的脉宽拉 STB（脉宽怎么来的不归这里管，见 core/heat_model）
  *         ④ 保存 App 下发的质量参数（浓度 / 预加热 / 遍数 / 点补偿 / 驱动方式）
  *
- * 对应原工程：src/hal/em_printer.cpp（+ em_spi.cpp 的送行部分）
  *
  * 不归本文件管（各有一户）：
  *   VH 升压开关        → hal/vh.cpp

@@ -3,7 +3,6 @@
  * 层次：纯逻辑层 / BLE 帧编解码
  * 职责：逐字节喂入的状态机拼帧（proto_feed）、校验、回调分发；
  *       以及回帧（proto_send / status / error / ack）的组装。
- * 对应原工程：src/utils/em_queue.cpp + src/hal/em_ble.cpp 的收发部分
  *
  * 关键约束：BLE 的 onWrite 一次可能只给一帧的一部分（MTU 分片），
  *   所以 proto_feed 必须能跨调用保持状态；坏帧计入 s_bad，

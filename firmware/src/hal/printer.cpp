@@ -4,7 +4,6 @@
  * 职责：只做两件事——
  *         ① 作业生命周期：取锁 → 查热保护 → 开 VH → 推进热模型 → 收尾释放
  *         ② 一行的拍子编排：把「走一步电机 + 加热哪几组」按节拍铺开
- * 对应原工程：src/hal/em_printer.cpp 的任务编排部分
  *
  * 实现已经拆开，本文件只做组合（想改细节去对应文件）：
  *   VH 开关与时序      → hal/vh.cpp
@@ -153,7 +152,7 @@ void printer_job_row(const uint8_t *row)
 void printer_job_row_raw(const uint8_t *row, uint16_t us, uint16_t cool_us)
 {
     /* 对照页也走与正常打印相同的能量上限：复刻的是时序结构
-     * （6 组全加热 / 4 拍 / 行尾延时），不是原工程那个 3000µs 的能量。
+     * （6 组全加热 / 4 拍 / 行尾延时），不是固定不变的恒能量。
      * 800µs 的标称安全窗口在这块拆机头上冷态不出色，见
      * printhead_set_heat_override() 的说明。 */
     if (us > HEAT_US_MAX) us = HEAT_US_MAX;

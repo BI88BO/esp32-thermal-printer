@@ -3,7 +3,6 @@
  * 层次：纯逻辑层 / 固件镜像写入（Arduino Update 库的唯一封装）
  * 职责：把"写另一个 app 分区"这件事包起来，并且只暴露必要的动作。
  *        分区表是默认 4MB 双 OTA：otadata + app0(1.25MB) + app1(1.25MB)。
- * 对应原工程：无（原工程没有 OTA）
  *
  * 安全边界（很重要）：
  *   - 唯一会改 otadata 的地方是 ota_flash_end() 里的 Update.end(true)，

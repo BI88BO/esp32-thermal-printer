@@ -1,7 +1,6 @@
 /* ============================================================================
  * MiniPrinter 重做版固件 —— 入口与架构总览
  * 层次：入口（只做初始化，不含任何业务逻辑）
- * 对应原工程：src/main.cpp（那边也只有十几行，做初始化后把控制权交给 em_task）
  *
  * ----------------------------------------------------------------------------
  * 一、目录结构（三代划分：硬件 / 业务 / 纯逻辑，每个文件只讲一件事）
@@ -25,7 +24,7 @@
  *       adc_filter.h         ADC 通用滤波（截尾均值 / 中值 / EMA，被上面两路共用）
  *       — 人机 —
  *       button.h/.cpp        按键去抖与短按/长按事件
- *       led.h/.cpp           状态灯：非阻塞闪烁状态机（原工程是 delay 硬等）
+ *       led.h/.cpp           状态灯：非阻塞闪烁状态机
  *       ble.h/.cpp           BLE GATT 服务、连接回调、transport_send
  *
  *     app/                 应用层：任务骨架 + 业务处理
@@ -50,7 +49,7 @@
  *         page_dotcheck.cpp    打印头点检（最常用）
  *         page_load.cpp        全黑负载
  *         page_measure.cpp     VH 压降测量
- *         page_copy.cpp        原工程复刻
+ *         page_copy.cpp        波形复刻
  *         page_ruler.cpp       走纸标尺
  *
  *     core/                 纯逻辑层：不碰硬件，可单独阅读
@@ -60,14 +59,6 @@
  *       crc32.h/.cpp         CRC32/IEEE 增量计算
  *       ota.h/.cpp           OTA 会话：序号、ACK 窗口、CRC 累计、任务
  *       ota_flash.h/.cpp     Update 库唯一封装：写备用分区、切 otadata、重启
- *
- *   与原工程的对应关系：
- *     config.h          ↔ em_config.h
- *     app/runtime.*     ↔ em_device.*        （全局状态集中定义）
- *     app/job + tasks   ↔ em_task.*          （任务拆分得更细）
- *     hal/*             ↔ hal/em_printer, em_motor, em_spi, em_adc, em_ble,
- *                          em_button, em_hal（LED/蜂鸣器）
- *     core/protocol.*   ↔ utils/em_queue.* + em_ble 的收发部分
  *
  * ----------------------------------------------------------------------------
  * 二、一次打印的数据流（顺着这条线读代码最快）

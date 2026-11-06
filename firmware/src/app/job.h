@@ -13,7 +13,6 @@
  *          app/job_overheat.cpp    st=3 过热暂停：等冷却、断点续打、放弃条件
  *          app/job_run.cpp         st=1/2 运行：取行打印、收尾、断流超时
  *          app/job_internal.h      三个分支之间的约定（仅供 app/ 内部）
- * 对应原工程：src/em_task.cpp 的 run_printer() + task_* 系列
  *
  * 为什么要单独一个任务：
  *   一行 384 点的加热是微秒级时序，中途不能切任务；但连续几百行全是

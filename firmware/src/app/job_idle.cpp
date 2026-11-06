@@ -5,7 +5,6 @@
  *         ① 释放打印头（上一个作业可能刚结束）
  *         ② 长按连续出纸（feedHeld）
  *         ③ 自检 / 走纸请求（pendingTest / pendingFeed）
- * 对应原工程：src/em_task.cpp 的 key_click_handle / key_long_click_handle
  *
  * 事件全都由别人置位，这里只负责执行：
  *   BLE 回调 → command.cpp 置 pendingTest/pendingFeed
@@ -100,7 +99,7 @@ void job_idle_tick(void)
                 ok = selftest_measure(500);
             }
             else if (k == 6)
-                ok = selftest_original_copy(500);   /* App selftest(5)：原工程复刻页 */
+                ok = selftest_waveform(500);        /* App selftest(5)：波形复刻页 */
             else if (k == 7)
                 ok = selftest_feed_ruler(500);      /* App selftest(6)：走纸标尺页 */
             else

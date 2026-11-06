@@ -7,11 +7,10 @@
  *         page_dotcheck.cpp  打印头点检（版本号 + 头温 + 能量阶梯 + 384 竖条）
  *         page_load.cpp      全黑负载（量带载压降）
  *         page_measure.cpp   VH 测量（15s 空载窗口 + 150 行满载）
- *         page_copy.cpp      原工程复刻（时序结构对照）
+ *         page_copy.cpp      波形复刻（时序结构对照）
  *         page_ruler.cpp     走纸标尺（10 条 2.5mm 间隔的线）
  *         draw.cpp           绘图基元（3×5 点阵数字、版本号抬头）
  *         common.h           能量标尺复位
- * 对应原工程：无独立模块（原工程自检逻辑散在 em_printer/em_task 里）
  *
  * RTOS 约束：这些页都会同步跑几百行，只允许由 app/job.cpp 的打印任务调用；
  * 绝不能在 BLE 回调或按键任务里直接调，否则会卡住协议栈。
@@ -20,7 +19,7 @@
  *
  * 页面编号由 app/runtime.h 的 pendingTest 选择，映射在 app/job.cpp：
  *   1 整页自检  2 打印头点检  3 全黑负载  4 测量+点检  5 VH 测量
- *   6 原工程复刻  7 走纸标尺
+ *   6 波形复刻    7 走纸标尺
  *
  * 所有页面返回 bool：false = 打印头被别的作业占着（或过热），没打成。
  * ========================================================================== */
@@ -49,9 +48,9 @@ bool selftest_load(uint32_t timeout_ms);
 /* VH 测量：先 15 秒只开 VH 不打印（量空载电压），再 150 行全黑（量压降） */
 bool selftest_measure(uint32_t timeout_ms);
 
-/* 原工程复刻：照 step_test.ino 的时序结构打三个方块，
+/* 波形复刻：按固定时序结构打三个方块，
  * 验的是走纸/选通时序，不是能量大小 */
-bool selftest_original_copy(uint32_t timeout_ms);
+bool selftest_waveform(uint32_t timeout_ms);
 
 /* 走纸标尺：一条实心行 + 20 行空白，重复 10 次，每段应推进 2.5mm。
  * 10 条线均匀排开 = 走纸正常；挤在一起 = 丢步，与加热无关 */

@@ -2,7 +2,6 @@
  * 文件：app/selftest/page_measure.cpp
  * 层次：应用层 / 诊断页
  * 职责：VH 压降测量页。两段窗口，方便万用表夹表笔。
- * 对应原工程：无
  * 依赖：selftest.h、common.h、config.h、printer.h、sensor.h
  *
  * 这是专业测量页，不通过按键 / 点检按钮触发（避免误触把纸打光）。
