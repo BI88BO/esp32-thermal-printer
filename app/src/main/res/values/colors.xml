@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 图标底色，与 tools/gen_launcher_icon.py 里的 BG 保持一致 -->
+    <color name="ic_launcher_background">#1B2430</color>
+
+    <!-- ============ 主色：与图标的青蓝指示灯同源 ============ -->
+    <color name="brand">#1B6C8F</color>
+    <color name="brand_dark">#0E4A63</color>
+    <color name="brand_container">#CDEAF8</color>
+    <color name="on_brand">#FFFFFF</color>
+    <color name="on_brand_container">#06263A</color>
+
+    <!-- ============ 表面与背景 ============ -->
+    <color name="surface">#FFFFFF</color>
+    <color name="background">#F3F6F9</color>
+    <color name="surface_variant">#E9EFF4</color>
+    <color name="on_surface">#16202A</color>
+    <color name="on_surface_var">#5A6B7A</color>
+    <color name="outline">#DCE5EC</color>
+
+    <!-- ============ 语义色 ============ -->
+    <color name="ok">#1E8E5A</color>
+    <color name="warn">#C1442E</color>
+    <color name="amber">#B26A00</color>
+</resources>
