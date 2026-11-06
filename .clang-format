@@ -1,0 +1,16 @@
+# 与固件现有风格一致：4 空格缩进、大括号独占一行、单行 if 允许不加大括号
+BasedOnStyle: LLVM
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ColumnLimit: 100
+BreakBeforeBraces: Allman
+AllowShortIfStatementsOnASingleLine: WithoutElse
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortLoopsOnASingleLine: true
+PointerAlignment: Right
+SpaceBeforeParens: ControlStatements
+SortIncludes: false
+IndentCaseLabels: false
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: false

@@ -1,0 +1,49 @@
+# ============================================================
+# MiniPrinter —— Git 忽略规则
+# 原则：源码与文档入库；编译产物、本机配置、历史备份一律不入库
+# ============================================================
+
+# ---------- PlatformIO 构建产物 ----------
+.pio/
+.pioenvs/
+.piolibdeps/
+*.pio
+
+# 构建中间件（在 build_dir 里也会出现，双保险）
+*.o
+*.a
+*.d
+*.elf
+*.map
+*.hex
+
+# ---------- 固件镜像 ----------
+# 编译出来的 app 镜像、合并整包、历史版本备份都不入库。
+# 需要发版时把 firmware_ota.bin 挂到 GitHub Release 附件里。
+firmware/*.bin
+firmware_ota*.bin
+
+# ---------- Android / Gradle ----------
+.gradle/
+build/
+local.properties
+*.iml
+.idea/
+captures/
+*.apk
+*.aab
+
+# ---------- 历史产物归档（本地留档，不入库） ----------
+# 各版本的 OTA 包、APK、整包备份都放在这里，发版走 GitHub Release 附件
+releases/
+
+# ---------- 源码备份（重构历史，留在本地参考） ----------
+firmware/src_v*_backup/
+
+# ---------- 工作区元数据 ----------
+.workbuddy/
+
+# ---------- 系统文件 ----------
+.DS_Store
+Thumbs.db
+desktop.ini
